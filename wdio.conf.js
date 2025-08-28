@@ -1,3 +1,4 @@
+const path = require('path');
 exports.config = {
     runner: 'local',
     specs: [
@@ -11,7 +12,7 @@ exports.config = {
         browserName: 'chrome'
     }],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -152,8 +153,13 @@ exports.config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+    afterStep: async function (step, scenario, result, context) {
+        if (!result.passed) {
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `ERROR_${timestamp}.png`;
+            await browser.saveScreenshot(path.resolve(__dirname, 'errorShots', filename));
+        }
+    },
     /**
      *
      * Runs after a Cucumber Scenario.
