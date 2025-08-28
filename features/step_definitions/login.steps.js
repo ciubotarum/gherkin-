@@ -4,11 +4,11 @@ Given('I am on the login page', async () => {
   await browser.url('https://practicesoftwaretesting.com/auth/login');
 });
 
-When('I enter valid credentials', async () => {
+When('I enter invalid credentials', async () => {
   const email = await $('#email');
   const password = await $('#password');
-  await email.setValue('john@email.com'); 
-  await password.setValue('John@email.com1');     
+  await email.setValue('wrong@email.com');
+  await password.setValue('wrongPassword');
 });
 
 When('I click the login button', async () => {
@@ -16,7 +16,13 @@ When('I click the login button', async () => {
   await loginBtn.click();
 });
 
-Then('I should see my account page', async () => {
-  await expect(browser).toHaveUrl('https://practicesoftwaretesting.com/account');
-  await expect(browser).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+Then('I should see an error message', async () => {
+  const errorMessage = await $('div.help-block');
+
+  // Wait up to 5 seconds for the element to appear
+  await errorMessage.waitForDisplayed({ timeout: 5000 });
+
+  // Check the text
+  const text = await errorMessage.getText();
+  expect(text).toContain('Invalid email or password');
 });
