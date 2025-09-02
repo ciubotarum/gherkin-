@@ -9,7 +9,7 @@ When('I select a "Hammer" category', async () => {
     await firstCategoryInput.click();
 });
 
-Then('only seven product should be displayed in the filtered results', async () => {
+Then('only seven products should be displayed in the filtered results', async () => {
     const resultsContainer = await $('[data-test="filter_completed"]');
     await resultsContainer.waitForDisplayed({ timeout: 5000 });
     const products = await resultsContainer.$$('a.card[data-test^="product-"]');
@@ -17,4 +17,20 @@ Then('only seven product should be displayed in the filtered results', async () 
     console.log("Products found:", products.length);
 
     expect(products.length).toBe(7);
+});
+
+Then('filter by brand "MightyCraft Hardware"', async () => {
+    const brandFilterInput = await $$('input[name = "brand_id"]')[1];
+    await brandFilterInput.waitForEnabled({ timeout: 5000 });
+    await brandFilterInput.click();
+});
+
+Then('only 1 product should be displayed in the filtered results', async () => {
+    const resultsContainer = await $('[data-test="filter_completed"]');
+    await resultsContainer.waitForDisplayed({ timeout: 5000 });
+    const products = await resultsContainer.$$('a.card[data-test^="product-"]');
+
+    console.log("Products found:", products.length);
+
+    expect(products.length).toBe(1);
 });
