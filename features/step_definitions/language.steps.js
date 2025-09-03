@@ -6,6 +6,7 @@ Given('I am on the main page to change the language', async () => {
 
 When('I click the language button', async () => {
   const langBtn = await $('#language');
+  await langBtn.waitForClickable({ timeout: 5000 });
   await langBtn.click();
 });
 
@@ -15,12 +16,12 @@ Then('a list of languages should appear', async () => {
 });
 
 Then('the list should contain 6 languages', async () => {
-  const languages = await $$('#dropdown-animated li');
+  const languages = await browser.$$('#dropdown-animated li');
   expect(languages.length).toBe(6);
 });
 
 When('I select the first language from the list', async () => {
-  const languages = await $$('#dropdown-animated li');
+  const languages = await browser.$$('#dropdown-animated li');
   await languages[0].click();
 });
 

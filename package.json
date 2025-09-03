@@ -18,6 +18,8 @@
     "@wdio/spec-reporter": "^9.19.2",
     "@wdio/visual-service": "^9.0.0",
     "chromedriver": "^139.0.3",
-    "wdio-chromedriver-service": "^8.1.1"
+    "geckodriver": "^6.0.1",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.2"
   }
 }

@@ -6,6 +6,7 @@ Given('I am on the main page looking to filter products', async () => {
 
 When('I select a "Hammer" category', async () => {
     const firstCategoryInput = await $$('div.checkbox div.checkbox input.icheck[name="category_id"]')[0];
+    firstCategoryInput.waitForClickable({ timeout: 5000 });
     await firstCategoryInput.click();
 });
 

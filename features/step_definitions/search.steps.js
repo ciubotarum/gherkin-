@@ -6,6 +6,9 @@ Given('I am on the main page', async () => {
 
 When('I enter {string} in the search field', async (keyword) => {
     const searchInput = await $('#search-query');
+    await searchInput.waitForDisplayed({ timeout: 5000 });
+    await searchInput.waitForEnabled({ timeout: 5000 });
+    await searchInput.waitForClickable({ timeout: 5000 });
     await searchInput.setValue(keyword);
 });
 

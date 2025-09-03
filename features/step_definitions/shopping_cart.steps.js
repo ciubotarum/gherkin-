@@ -5,9 +5,17 @@ Given('I am on the main page to test the shopping cart functionality', async () 
 });
 
 When('I click on a product', async () => {
-  const containers = await $$('div.container');
-  const thirdContainer = containers[2];
-  const productLinks = await thirdContainer.$$('a');
+  await browser.waitUntil(async () => {
+    const products = await $$('a[href*="/product/"]');
+    return products.length > 0;
+  }, {
+    timeout: 10000,
+    timeoutMsg: 'Expected at least one product link to appear'
+  });
+
+  const productLinks = await $$('a[href*="/product/"]');
+
+  await productLinks[0].waitForClickable({ timeout: 5000 });
   await productLinks[0].click();
 });
 
@@ -21,5 +29,5 @@ Then('a success toast should appear with the correct message', async () => {
   const toast = await $('#toast-container');
   await toast.waitForDisplayed({ timeout: 5000 });
   const toastText = await toast.getText();
-  expect(toastText).toContain('Product added to shopping cart.'); 
+  expect(toastText).toContain('Product added to shopping cart.');
 });

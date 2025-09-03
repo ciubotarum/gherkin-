@@ -5,9 +5,16 @@ Given('I am on the main page looking for products', async () => {
 });
 
 When('I click the first product', async () => {
-  const containers = await $$('div.container');
-  const productContainer = containers[2];
-  const productLinks = await productContainer.$$('a');
+  await browser.waitUntil(async () => {
+    const products = await $$('a[href*="/product/"]');
+    return products.length > 0;
+  }, {
+    timeout: 10000,
+    timeoutMsg: 'Expected at least one product link to appear'
+  });
+
+  const productLinks = await $$('a[href*="/product/"]');
+  await productLinks[0].waitForClickable({ timeout: 5000 });
   await productLinks[0].click();
 });
 

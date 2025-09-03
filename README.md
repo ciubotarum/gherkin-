@@ -25,3 +25,20 @@ npm install --save-dev @wdio/local-runner @wdio/chromedriver-service @wdio/cucum
 ```sh
 npm test
 ```
+
+# Install service for Firefox
+
+```bash
+npm install --save-dev geckodriver
+npm install --save-dev wdio-geckodriver-service
+```
+
+# Run browsers in specific broser
+- For chrome
+```bash
+npx wdio run wdio.conf.js --capabilities browserName=chrome
+```
+- For firefox
+```bash
+npx wdio run wdio.conf.js --capabilities browserName=firefox
+```
