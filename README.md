@@ -33,12 +33,12 @@ npm install --save-dev geckodriver
 npm install --save-dev wdio-geckodriver-service
 ```
 
-# Run browsers in specific broser
-- For chrome
+# Run tests in specific browser
+- For Chrome
 ```bash
 npx wdio run wdio.conf.js --capabilities browserName=chrome
 ```
-- For firefox
+- For Firefox
 ```bash
 npx wdio run wdio.conf.js --capabilities browserName=firefox
 ```
