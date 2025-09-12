@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+require('chai').should();
 
 Given('I am on the main page looking for products', async () => {
   await browser.url('https://practicesoftwaretesting.com/');
@@ -26,5 +27,5 @@ Then('the page title should be the product name followed by " - Practice Softwar
   const productTitle = await $('h1[data-test="product-name"]').getText();
   const expectedTitle = `${productTitle} - Practice Software Testing - Toolshop - v5.0`;
   const actualTitle = await browser.getTitle();
-  expect(actualTitle).toBe(expectedTitle);
+  actualTitle.should.equal(expectedTitle);
 });

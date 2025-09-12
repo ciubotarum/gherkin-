@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+const { expect } = require('chai');
 
 Given('I am on the main page looking for Hand Tools', async () => {
   await browser.url('https://practicesoftwaretesting.com/');
@@ -26,5 +27,5 @@ Then('the page title should be "Category: Hand Tools"', async () => {
   const pageTitle = await $('[data-test="page-title"]');
   await pageTitle.waitForDisplayed({ timeout: 5000 });
   const text = await pageTitle.getText();
-  expect(text).toBe('Category: Hand Tools');
+  expect(text).to.equal('Category: Hand Tools');
 });

@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+const assert = require('chai').assert;
 
 Given('I am on the main page', async () => {
     await browser.url('https://practicesoftwaretesting.com/');
@@ -23,7 +24,7 @@ Then('I should see 2 products in the results', async () => {
 
     const products = await resultsContainer.$$('a.card[data-test^="product-"]');
     console.log("There have been found", products.length);
-    expect(products.length).toBe(2);
+    assert.lengthOf(products, 2);
 });
 
 Then('Each product should contain {string} in the title', async (keyword) => {
@@ -32,6 +33,6 @@ Then('Each product should contain {string} in the title', async (keyword) => {
 
     for (const product of products) {
         const title = await product.$('h5[data-test="product-name"]').getText();
-        expect(title.toLowerCase()).toContain(keyword.toLowerCase());
+        assert.include(title.toLowerCase(), keyword.toLowerCase());
     }
 });

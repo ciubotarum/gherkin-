@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+const { expect } = require('chai');
 
 Given('I am on the login page', async () => {
   await browser.url('https://practicesoftwaretesting.com/auth/login');
@@ -18,11 +19,8 @@ When('I click the login button', async () => {
 
 Then('I should see an error message', async () => {
   const errorMessage = await $('div.help-block');
-
-  // Wait up to 5 seconds for the element to appear
   await errorMessage.waitForDisplayed({ timeout: 5000 });
 
-  // Check the text
   const text = await errorMessage.getText();
-  expect(text).toContain('Invalid email or password');
+  expect(text).to.include('Invalid email or password');
 });

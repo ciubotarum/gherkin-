@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+require('chai').should();
 
 Given('I am on the main page to test the shopping cart functionality', async () => {
   await browser.url('https://practicesoftwaretesting.com/');
@@ -29,5 +30,5 @@ Then('a success toast should appear with the correct message', async () => {
   const toast = await $('#toast-container');
   await toast.waitForDisplayed({ timeout: 5000 });
   const toastText = await toast.getText();
-  expect(toastText).toContain('Product added to shopping cart.');
+  toastText.should.include('Product added to shopping cart.');
 });
