@@ -2,7 +2,7 @@ const path = require('path');
 exports.config = {
     runner: 'local',
     specs: [
-        './features/**/*.feature'
+        '../features/**/*.feature'
     ],
     exclude: [
         // 'path/to/excluded/files'
@@ -13,7 +13,7 @@ exports.config = {
         {
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: ['headless', 'disable-gpu', '--window-size=1920,1080']
+                args: ['--headless', '--disable-gpu', '--window-size=1920,1080']
             }
         },
         {
@@ -38,7 +38,7 @@ exports.config = {
     reporters: ['spec'],
 
     cucumberOpts: {
-        require: ['./features/step_definitions/**.js'],
+        require: [path.resolve(__dirname, '../features/step_definitions/*.steps.js')],
         backtrace: false,
         requireModule: [],
         dryRun: false,
@@ -51,27 +51,18 @@ exports.config = {
         timeout: 60000,
         ignoreUndefinedDefinitions: false
     },
-    // before: function (capabilities, specs) {
-    // },
-    // beforeScenario: function (world, context) {
-    // },
-    // beforeStep: function (step, scenario, context) {
-    // },
+
+    before: function (capabilities, specs) {
+        global.expect = require('chai').expect;
+        global.assert = require('chai').assert;
+        require('chai').should();
+    },
+
     afterStep: async function (step, scenario, result, context) {
         if (!result.passed) {
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const filename = `ERROR_${timestamp}.png`;
-            await browser.saveScreenshot(path.resolve(__dirname, 'errorShots', filename));
+            await browser.saveScreenshot(path.resolve(__dirname, '../errorShots', filename));
         }
     },
-    // afterScenario: function (world, result, context) {
-    // },
-    // afterFeature: function (uri, feature) {
-    // },
-    // afterCommand: function (commandName, args, result, error) {
-    // },
-    // after: function (result, capabilities, specs) {
-    // },
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
 }

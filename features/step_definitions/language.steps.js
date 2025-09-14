@@ -1,5 +1,4 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-const assert = require('chai').assert;
 
 Given('I am on the main page to change the language', async () => {
   await browser.url('https://practicesoftwaretesting.com/');

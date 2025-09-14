@@ -1,5 +1,4 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-const { expect } = require('chai');
 
 Given('I am on the main page looking for Hand Tools', async () => {
   await browser.url('https://practicesoftwaretesting.com/');
