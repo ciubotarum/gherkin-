@@ -1,36 +1,28 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+const { pages } = require('../../po');
+
+const mainPage = pages('mainPage');
 
 Given('I am on the main page looking to filter products', async () => {
-    await browser.url('https://practicesoftwaretesting.com/');
+    await mainPage.open();
 });
 
 When('I select a "Hammer" category', async () => {
-    const firstCategoryInput = await $$('div.checkbox div.checkbox input.icheck[name="category_id"]')[0];
-    firstCategoryInput.waitForClickable({ timeout: 5000 });
-    await firstCategoryInput.click();
+    await mainPage.filter.selectCategoryFilter(0);
 });
 
 Then('only seven products should be displayed in the filtered results', async () => {
-    const resultsContainer = await $('[data-test="filter_completed"]');
-    await resultsContainer.waitForDisplayed({ timeout: 5000 });
-    const products = await resultsContainer.$$('a.card[data-test^="product-"]');
-
-    console.log("Products found:", products.length);
-
-    products.should.have.lengthOf(7);
+    const productCount = await mainPage.filter.getFilteredProductCount();
+    console.log("Products found:", productCount);
+    expect(productCount).to.equal(7);
 });
 
 Then('filter by brand "MightyCraft Hardware"', async () => {
-    const brandFilterInput = await $$('input[name = "brand_id"]')[1];
-    await brandFilterInput.waitForEnabled({ timeout: 5000 });
-    await brandFilterInput.click();
+    await mainPage.filter.selectBrandFilter(1);
 });
 
 Then('only 1 product should be displayed in the filtered results', async () => {
-    const resultsContainer = await $('[data-test="filter_completed"]');
-    await resultsContainer.waitForDisplayed({ timeout: 5000 });
-    const products = await resultsContainer.$$('a.card[data-test^="product-"]');
-
-    console.log("Products found:", products.length);
-    products.should.have.lengthOf(1);
+    const productCount = await mainPage.filter.getFilteredProductCount();
+    console.log("Products found:", productCount);
+    expect(productCount).to.equal(1);
 });
