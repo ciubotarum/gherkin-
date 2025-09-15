@@ -13,11 +13,6 @@ class SearchComponent extends BaseComponent {
         await this.waitAndClick(this.searchButton);
     }
 
-    async search(keyword) {
-        await this.enterSearchKeyword(keyword);
-        await this.clickSearchButton();
-    }
-
     async getSearchResults() {
         await this.searchResults.waitForDisplayed({ timeout: 5000 });
         return await this.searchResults.$$('a.card[data-test^="product-"]');

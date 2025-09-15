@@ -17,17 +17,17 @@ class ProductListComponent extends BaseComponent {
     async clickFirstProduct() {
         await this.waitForProducts();
         const productLinks = await this.productLinks;
-        await productLinks[0].waitForClickable({ timeout: 5000 });
-        await productLinks[0].click();
+        const firstProduct = productLinks[0];
+        await firstProduct.scrollIntoView();
+        await this.waitAndClick(firstProduct);
     }
 
     async clickProductByIndex(index) {
         await this.waitForProducts();
+
         const products = await this.products;
         const product = products[index];
-        await product.scrollIntoView();
-        await product.waitForDisplayed({ timeout: 5000 });
-        await product.click();
+        await this.waitAndClick(product);
     }
 }
 

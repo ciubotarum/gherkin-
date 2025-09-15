@@ -11,7 +11,6 @@ class NavigationComponent extends BaseComponent {
     }
 
     async selectHandTools() {
-        await this.handToolsLink.waitForDisplayed({ timeout: 5000 });
         await this.waitAndClick(this.handToolsLink);
     }
 
@@ -20,9 +19,8 @@ class NavigationComponent extends BaseComponent {
     }
 
     async selectLanguage(index = 0) {
-        await this.languageDropdown.waitForDisplayed({ timeout: 5000 });
         const languages = await this.languageDropdown.$$('li');
-        await languages[index].click();
+        await this.waitAndClick(languages[index]);
     }
 
     async getLanguageList() {

@@ -43,7 +43,7 @@ When('I select the third payment method', async () => {
 });
 
 When('I confirm the order', async () => {
-  await checkoutPage.checkoutForm.confirmOrder();
+  await checkoutPage.checkoutForm.finishOrder();
 });
 
 Then('a payment success message should appear', async () => {

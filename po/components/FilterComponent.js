@@ -7,14 +7,12 @@ class FilterComponent extends BaseComponent {
 
     async selectCategoryFilter(index = 0) {
         const filters = await this.categoryFilters;
-        await filters[index].waitForClickable({ timeout: 5000 });
-        await filters[index].click();
+        await this.waitAndClick(filters[index]);
     }
 
     async selectBrandFilter(index) {
         const filters = await this.brandFilters;
-        await filters[index].waitForEnabled({ timeout: 5000 });
-        await filters[index].click();
+        await this.waitAndClick(filters[index]);
     }
 
     async getFilteredProducts() {

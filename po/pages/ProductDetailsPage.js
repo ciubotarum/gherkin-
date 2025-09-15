@@ -1,34 +1,30 @@
 const BasePage = require('./BasePage');
+const { ProductDetailsComponent } = require('../components');
 
 class ProductDetailsPage extends BasePage {
     constructor() {
-        super('');
+        super('https://practicesoftwaretesting.com/product/');
+        this.productDetails = new ProductDetailsComponent();
     }
 
-    get productName() { return $('h1[data-test="product-name"]'); }
-    get addToCartButton() { return $('#btn-add-to-cart'); }
-    get toast() { return $('#toast-container'); }
-
     async waitForPageLoad() {
-        await this.productName.waitForDisplayed({ timeout: 5000 });
+        await this.productDetails.waitForPageLoad();
     }
 
     async getProductName() {
-        return await this.waitAndGetText(this.productName);
+        return await this.productDetails.getProductName();
     }
 
     async addToCart() {
-        await this.waitAndClick(this.addToCartButton);
-        await this.toast.waitForDisplayed({ timeout: 5000 });
+        await this.productDetails.addToCart();
     }
 
     async getToastMessage() {
-        await this.toast.waitForDisplayed({ timeout: 5000 });
-        return await this.waitAndGetText(this.toast);
+        return await this.productDetails.getToastMessage();
     }
 
     async getPageTitle() {
-        return await browser.getTitle();
+        return await browser.getTitle(); 
     }
 }
 

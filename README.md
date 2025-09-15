@@ -26,6 +26,11 @@ npm install --save-dev @wdio/local-runner @wdio/chromedriver-service @wdio/cucum
 npm test
 ```
 
+# Run only one feature file
+```sh
+npm test -- --spec features/nameOfFeature.feature
+```
+
 # Install service for Firefox
 
 ```bash
