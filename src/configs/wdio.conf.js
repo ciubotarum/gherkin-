@@ -2,7 +2,7 @@ const path = require('path');
 exports.config = {
     runner: 'local',
     specs: [
-        '../features/**/*.feature'
+        '../tests/**/*.feature'
     ],
     exclude: [
         // 'path/to/excluded/files'
@@ -38,7 +38,7 @@ exports.config = {
     reporters: ['spec'],
 
     cucumberOpts: {
-        require: [path.resolve(__dirname, '../features/step_definitions/*.steps.js')],
+        require: [path.resolve(__dirname, '../tests/step_definitions/*.steps.js')],
         backtrace: false,
         requireModule: [],
         dryRun: false,
@@ -62,7 +62,7 @@ exports.config = {
         if (!result.passed) {
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const filename = `ERROR_${timestamp}.png`;
-            await browser.saveScreenshot(path.resolve(__dirname, '../errorShots', filename));
+            await browser.saveScreenshot(path.resolve(__dirname, '../../errorShots', filename));
         }
     },
 }
