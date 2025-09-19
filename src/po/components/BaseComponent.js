@@ -3,6 +3,7 @@ class BaseComponent {
         await element.waitForDisplayed({ timeout: 5000 });
         await element.waitForEnabled({ timeout: 5000 });
         await element.waitForClickable({ timeout: 5000 });
+        await browser.pause(200); 
         await element.click();
     }
 

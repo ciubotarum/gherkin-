@@ -18,7 +18,7 @@ When('I select the "Hand Tools" category from the dropdown', async () => {
 
 Then('I should be redirected to the Hand Tools category page', async () => {
   await browser.waitUntil(
-    async () => (await categoryPage.getCurrentUrl()) === 'https://practicesoftwaretesting.com/category/hand-tools',
+    async () => (await categoryPage.getCurrentUrl()).includes('/category/hand-tools'),
     { timeout: 5000, timeoutMsg: 'Did not redirect to Hand Tools category page' }
   );
 });

@@ -57,6 +57,6 @@ Then('I click the finish button', async () => {
 
 Then('an order success message should appear', async () => {
   const msgText = await checkoutPage.checkoutForm.getPaymentSuccessMessage();
-  console.log('Order success message:', msgText);
+
   expect(msgText.trim()).to.include('Payment was successful');
 });

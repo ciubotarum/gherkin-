@@ -7,7 +7,7 @@ const {
 } = require('../components');
 class MainPage extends BasePage {
     constructor() {
-        super('https://practicesoftwaretesting.com/');
+        super('/'); 
         this.search = new SearchComponent();
         this.productList = new ProductListComponent();
         this.navigation = new NavigationComponent();

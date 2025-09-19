@@ -3,7 +3,7 @@ const { LoginForm } = require('../components');
 
 class LoginPage extends BasePage {
     constructor() {
-        super('https://practicesoftwaretesting.com/auth/login');
+        super('/auth/login');
         this.loginForm = new LoginForm();
     }
 

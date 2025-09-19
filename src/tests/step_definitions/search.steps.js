@@ -17,7 +17,6 @@ When('I click the search button', async () => {
 
 Then('I should see 2 products in the results', async () => {
     const products = await mainPage.search.getSearchResults();
-    console.log("There have been found", products.length);
     assert.lengthOf(products, 2);
 });
 

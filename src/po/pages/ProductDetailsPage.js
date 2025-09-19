@@ -3,7 +3,7 @@ const { ProductDetailsComponent } = require('../components');
 
 class ProductDetailsPage extends BasePage {
     constructor() {
-        super('https://practicesoftwaretesting.com/product/');
+        super('/product/'); 
         this.productDetails = new ProductDetailsComponent();
     }
 

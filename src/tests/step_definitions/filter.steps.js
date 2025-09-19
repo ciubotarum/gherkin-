@@ -13,7 +13,6 @@ When('I select a "Hammer" category', async () => {
 
 Then('only seven products should be displayed in the filtered results', async () => {
     const productCount = await mainPage.filter.getFilteredProductCount();
-    console.log("Products found:", productCount);
     expect(productCount).to.equal(7);
 });
 
@@ -23,6 +22,5 @@ Then('filter by brand "MightyCraft Hardware"', async () => {
 
 Then('only 1 product should be displayed in the filtered results', async () => {
     const productCount = await mainPage.filter.getFilteredProductCount();
-    console.log("Products found:", productCount);
     expect(productCount).to.equal(1);
 });

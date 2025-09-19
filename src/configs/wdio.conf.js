@@ -26,7 +26,7 @@ exports.config = {
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'warn',
     bail: 0,
-    // baseUrl: 'http://localhost:8080',
+    baseUrl: 'https://practicesoftwaretesting.com',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
