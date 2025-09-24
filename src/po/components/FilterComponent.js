@@ -6,13 +6,11 @@ class FilterComponent extends BaseComponent {
     get filterResults() { return $('[data-test="filter_completed"]'); }
 
     async selectCategoryFilter(index = 0) {
-        const filters = await this.categoryFilters;
-        await this.waitAndClick(filters[index]);
+        await this.waitAndClick(await this.categoryFilters[index]);
     }
 
     async selectBrandFilter(index) {
-        const filters = await this.brandFilters;
-        await this.waitAndClick(filters[index]);
+        await this.waitAndClick(await this.brandFilters[index]);
     }
 
     async getFilteredProducts() {
@@ -23,6 +21,19 @@ class FilterComponent extends BaseComponent {
     async getFilteredProductCount() {
         const products = await this.getFilteredProducts();
         return products.length;
+    }
+
+    async waitForFilteredProductCount(expectedCount, timeout = 5000) {
+        await browser.waitUntil(
+            async () => {
+                const products = await this.getFilteredProducts();
+                return products.length === expectedCount;
+            },
+            {
+                timeout,
+                timeoutMsg: `Expected ${expectedCount} products but did not see it within ${timeout}ms`
+            }
+        );
     }
 }
 

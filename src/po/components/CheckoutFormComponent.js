@@ -13,12 +13,15 @@ class CheckoutFormComponent extends BaseComponent {
 
     get paymentSuccessMessage() { return $('[data-test="payment-success-message"]'); }
 
+    get billingAddressForm() { return $('div[formgroupname="address"]'); }
+
     async proceedToLogin() {
         await this.waitAndClick(this.proceedButton1);
     }
 
     async proceedToPayment() {
         await this.waitAndClick(this.proceedButton2);
+        await this.billingAddressForm.waitForDisplayed({ timeout: 5000 });
     }
 
     async proceedToConfirmation() {
@@ -32,8 +35,7 @@ class CheckoutFormComponent extends BaseComponent {
 
     async selectPaymentMethod(optionIndex = 2) {
         await this.waitAndClick(this.paymentDropdown);
-        const options = await this.paymentDropdown.$$('option');
-        await options[optionIndex].click();
+        await this.paymentDropdown.$$('option')[optionIndex].click();
     }
 
     async finishOrder() {

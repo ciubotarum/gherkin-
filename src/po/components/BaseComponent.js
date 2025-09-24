@@ -3,11 +3,12 @@ class BaseComponent {
         await element.waitForDisplayed({ timeout: 5000 });
         await element.waitForEnabled({ timeout: 5000 });
         await element.waitForClickable({ timeout: 5000 });
-        await browser.pause(200); 
+        await element.scrollIntoView();
         await element.click();
     }
 
     async waitAndSetValue(element, value) {
+        await element.scrollIntoView();
         await element.waitForDisplayed({ timeout: 5000 });
         await element.waitForEnabled({ timeout: 5000 });
         await browser.pause(200);

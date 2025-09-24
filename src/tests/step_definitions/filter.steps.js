@@ -9,6 +9,7 @@ Given('I am on the main page looking to filter products', async () => {
 
 When('I select a "Hammer" category', async () => {
     await mainPage.filter.selectCategoryFilter(0);
+    await mainPage.filter.waitForFilteredProductCount(7);
 });
 
 Then('only seven products should be displayed in the filtered results', async () => {
