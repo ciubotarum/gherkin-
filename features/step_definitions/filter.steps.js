@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+require('chai').should();
 
 Given('I am on the main page looking to filter products', async () => {
     await browser.url('https://practicesoftwaretesting.com/');
@@ -17,7 +18,7 @@ Then('only seven products should be displayed in the filtered results', async ()
 
     console.log("Products found:", products.length);
 
-    expect(products.length).toBe(7);
+    products.should.have.lengthOf(7);
 });
 
 Then('filter by brand "MightyCraft Hardware"', async () => {
@@ -32,6 +33,5 @@ Then('only 1 product should be displayed in the filtered results', async () => {
     const products = await resultsContainer.$$('a.card[data-test^="product-"]');
 
     console.log("Products found:", products.length);
-
-    expect(products.length).toBe(1);
+    products.should.have.lengthOf(1);
 });

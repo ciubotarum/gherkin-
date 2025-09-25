@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@wdio/cucumber-framework');
+const assert = require('chai').assert;
 
 Given('I am on the main page to change the language', async () => {
   await browser.url('https://practicesoftwaretesting.com/');
@@ -17,7 +18,7 @@ Then('a list of languages should appear', async () => {
 
 Then('the list should contain 6 languages', async () => {
   const languages = await browser.$$('#dropdown-animated li');
-  expect(languages.length).toBe(6);
+  assert.lengthOf(languages, 6);
 });
 
 When('I select the first language from the list', async () => {
@@ -29,5 +30,5 @@ Then('the site language should change accordingly', async () => {
   const heading = await $('#language');
 
   const text = await heading.getText();
-  expect(text).toBe('DE');
+  assert.equal(text, 'DE');
 });

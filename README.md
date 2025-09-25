@@ -42,3 +42,10 @@ npx wdio run wdio.conf.js --capabilities browserName=chrome
 ```bash
 npx wdio run wdio.conf.js --capabilities browserName=firefox
 ```
+
+# Use Chai Assertions
+
+- Install Chai
+```bash
+npm install --save-dev chai
+```
