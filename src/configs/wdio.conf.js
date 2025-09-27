@@ -1,13 +1,10 @@
 const path = require('path');
+const fs = require('fs');
+
 exports.config = {
     runner: 'local',
-    specs: [
-        '../tests/**/*.feature'
-    ],
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
-    maxInstances: 2,
+    specs: ['../tests/**/*.feature'],
+    maxInstances: 1,
     specFileRetries: 2,
     capabilities: [
         {
@@ -23,9 +20,7 @@ exports.config = {
             }
         }
     ],
-    // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'warn',
-    bail: 0,
     baseUrl: 'https://practicesoftwaretesting.com',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
@@ -35,34 +30,73 @@ exports.config = {
         'geckodriver'
     ],
     framework: 'cucumber',
-    reporters: ['spec'],
+
+    reporters: [
+        'spec',
+        ['html-nice', {
+            outputDir: './reports/html-reports',
+            filename: 'report.html',
+            reportTitle: 'WebdriverIO Test Report - Gherkin BDD Tests',
+            showInBrowser: false,
+            collapseTests: false,
+            linkScreenshots: true,
+            screenshotPath: './screenshots'
+        }],
+    ],
 
     cucumberOpts: {
         require: [path.resolve(__dirname, '../tests/step_definitions/*.steps.js')],
-        backtrace: false,
-        requireModule: [],
-        dryRun: false,
-        failFast: false,
-        name: [],
-        snippets: true,
-        source: true,
-        strict: false,
-        tagExpression: '',
         timeout: 60000,
-        ignoreUndefinedDefinitions: false
     },
 
-    before: function (capabilities, specs) {
+    onPrepare: function (config, capabilities) {
+        const outputDir = path.join(__dirname, '../../reports/html-reports');
+        const screenshotsDir = path.join(__dirname, '../../reports/html-reportsscreenshots');
+
+        [outputDir, screenshotsDir].forEach(dir => {
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+        });
+    },
+
+    onComplete: async function (exitCode, config, capabilities, results) {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const { ReportAggregator } = await import('wdio-html-nice-reporter');
+        const reportAggregator = new ReportAggregator({
+            outputDir: './reports/html-reports',
+            filename: 'report.html',
+            reportTitle: 'WebdriverIO Test Report - Gherkin BDD Tests',
+            browserName: 'multi-browser',
+            showInBrowser: false,
+            collapseTests: false,
+            linkScreenshots: true,
+            LOG: 'warn'
+        });
+
+        await reportAggregator.createReport();
+
+        const reportPath = path.join(__dirname, '../../reports/html-reports/report.html');
+        const { execSync } = require('child_process');
+        execSync(`start "" "${reportPath}"`, {
+            stdio: 'ignore',
+            timeout: 5000
+        });
+    },
+
+    before: function () {
         global.expect = require('chai').expect;
         global.assert = require('chai').assert;
         require('chai').should();
     },
 
-    afterStep: async function (step, scenario, result, context) {
+    afterStep: async function (step, scenario, result) {
         if (!result.passed) {
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const filename = `ERROR_${timestamp}.png`;
-            await browser.saveScreenshot(path.resolve(__dirname, '../../errorShots', filename));
+            const filepath = path.resolve(__dirname, '../../reports/html-reportsscreenshots', filename);
+            await browser.saveScreenshot(filepath);
         }
     },
 }

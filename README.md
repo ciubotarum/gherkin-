@@ -54,3 +54,10 @@ npx wdio run wdio.conf.js --capabilities browserName=firefox
 ```bash
 npm install --save-dev chai
 ```
+
+# Install HTML reporter
+```bash
+npm install --save-dev wdio-html-nice-reporter
+```
+- The reporter will be automatically opened in the browser.
+- You must delete the forlder `reports` if you want to generate a new report.
