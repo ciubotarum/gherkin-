@@ -40,7 +40,7 @@ class NavigationComponent extends BaseComponent {
     try {
       await this.languageDropdown.waitForDisplayed({ timeout: 5000 });
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   }

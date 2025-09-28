@@ -109,3 +109,34 @@ npx prettier . --check
 # or
 npm run format:check
 ```
+
+# ESLint
+
+- Install ESLint
+
+```bash
+npm install --save-dev eslint@latest @eslint/js@latest
+```
+
+- Run the linting
+```bash
+npx eslint src/
+# or
+npm run lint
+```
+
+- To fix linting issues automatically
+
+```bash
+npx eslint src/ --fix
+# or
+npm run lint:fix
+```
+- To check linting with zero warnings (exit code 1 if there are warnings or errors)
+
+```bash
+npx eslint src/ --max-warnings 0
+# or
+npm run lint:check
+```
+

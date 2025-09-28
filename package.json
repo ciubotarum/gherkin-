@@ -7,13 +7,17 @@
     "test": "wdio run ./src/configs/wdio.conf.js",
     "wdio": "wdio run ./src/configs/wdio.conf.js",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "lint:check": "eslint src/ --max-warnings 0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^12.2.0",
+    "@eslint/js": "^9.36.0",
     "@wdio/cli": "^9.19.2",
     "@wdio/cucumber-framework": "^9.19.2",
     "@wdio/local-runner": "^9.19.2",
@@ -21,6 +25,7 @@
     "@wdio/visual-service": "^9.0.0",
     "chai": "^6.0.1",
     "chromedriver": "^139.0.3",
+    "eslint": "^9.36.0",
     "geckodriver": "^6.0.1",
     "open": "^10.2.0",
     "prettier": "3.6.2",
