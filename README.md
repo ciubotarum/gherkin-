@@ -84,6 +84,8 @@ npm install --save-dev wdio-html-nice-reporter
 ```bash
 # Windows
 start reports/html-reports/report.html
+# or
+npm run report:open
 ```
 
 # Prettier

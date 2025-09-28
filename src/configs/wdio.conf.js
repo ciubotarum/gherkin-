@@ -76,13 +76,6 @@ exports.config = {
     });
 
     await reportAggregator.createReport();
-
-    const reportPath = path.join(__dirname, '../../reports/html-reports/report.html');
-    const { execSync } = require('child_process');
-    execSync(`start "" "${reportPath}"`, {
-      stdio: 'ignore',
-      timeout: 5000,
-    });
   },
 
   before: function () {
