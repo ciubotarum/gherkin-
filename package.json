@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run ./src/configs/wdio.conf.js",
-    "wdio": "wdio run ./src/configs/wdio.conf.js"
+    "wdio": "wdio run ./src/configs/wdio.conf.js",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +23,7 @@
     "chromedriver": "^139.0.3",
     "geckodriver": "^6.0.1",
     "open": "^10.2.0",
+    "prettier": "3.6.2",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-geckodriver-service": "^5.0.2",
     "wdio-html-nice-reporter": "^8.1.7"

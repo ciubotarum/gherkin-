@@ -7,11 +7,11 @@ const SearchComponent = require('./SearchComponent');
 const ProductDetailsComponent = require('./ProductDetailsComponent');
 
 module.exports = {
-    LoginForm,
-    CheckoutFormComponent,
-    FilterComponent,
-    NavigationComponent,
-    ProductListComponent,
-    SearchComponent,
-    ProductDetailsComponent
+  LoginForm,
+  CheckoutFormComponent,
+  FilterComponent,
+  NavigationComponent,
+  ProductListComponent,
+  SearchComponent,
+  ProductDetailsComponent,
 };
