@@ -1,0 +1,39 @@
+name: WebdriverIO Tests
+
+on:
+  push:
+    branches:
+      - pom-pattern
+  pull_request:
+    branches:
+      - pom-pattern
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        tag: [smoke, regression, positive, negative, critical]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with tag
+        run: npm run test:${{ matrix.tag }}
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wdio-report-${{ matrix.tag }}
+          path: reports/html-reports

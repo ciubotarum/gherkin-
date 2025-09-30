@@ -10,7 +10,23 @@ exports.config = {
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: ['--headless', '--disable-gpu', '--window-size=1920,1080'],
+        args: [
+          '--headless=new',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--disable-extensions',
+          '--no-sandbox',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor',
+          '--window-size=1920,1080',
+          '--disable-blink-features=AutomationControlled',
+        ],
+        prefs: {
+          'profile.default_content_setting_values.notifications': 2,
+        },
+      },
+      'wdio:devtoolsOptions': {
+        headless: true,
       },
     },
     {
@@ -22,7 +38,7 @@ exports.config = {
   ],
   logLevel: 'warn',
   baseUrl: 'https://practicesoftwaretesting.com',
-  waitforTimeout: 10000,
+  waitforTimeout: 15000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
   services: ['chromedriver', 'geckodriver'],
@@ -39,7 +55,7 @@ exports.config = {
         showInBrowser: false,
         collapseTests: false,
         linkScreenshots: true,
-        screenshotPath: './screenshots',
+        screenshotPath: './reports/html-reports/screenshots',
       },
     ],
   ],
@@ -61,7 +77,7 @@ exports.config = {
 
   onPrepare: function (config, capabilities) {
     const outputDir = path.join(__dirname, '../../reports/html-reports');
-    const screenshotsDir = path.join(__dirname, '../../reports/html-reportsscreenshots');
+    const screenshotsDir = path.join(__dirname, '../../reports/html-reports/screenshots');
 
     [outputDir, screenshotsDir].forEach((dir) => {
       if (!fs.existsSync(dir)) {
@@ -98,7 +114,7 @@ exports.config = {
     if (!result.passed) {
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const filename = `ERROR_${timestamp}.png`;
-      const filepath = path.resolve(__dirname, '../../reports/html-reportsscreenshots', filename);
+      const filepath = path.resolve(__dirname, '../../reports/html-reports/screenshots', filename);
       await browser.saveScreenshot(filepath);
     }
   },
