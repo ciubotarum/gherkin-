@@ -1,5 +1,6 @@
 Feature: Product search
 
+    @positive @regression
     Scenario: User searches for "bolt" and sees two products
         Given I am on the main page
         When I enter "bolt" in the search field

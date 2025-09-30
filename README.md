@@ -39,7 +39,7 @@ npm test
 # Run only one feature file
 
 ```sh
-npm test -- --spec features/nameOfFeature.feature
+npm test -- --spec src/tests/nameOfFeature.feature
 ```
 
 # Install service for Firefox
@@ -142,3 +142,49 @@ npx eslint src/ --max-warnings 0
 npm run lint:check
 ```
 
+# Run tests with tags
+
+- Run negative tests only
+```sh
+npm test -- --cucumberOpts.tags="@negative"
+# or 
+npm run test:negative
+```
+
+- Run positive tests only
+```sh
+npm test -- --cucumberOpts.tags="@positive"
+# or 
+npm run test:positive
+```
+
+- Run smoke tests
+```sh
+npm test -- --cucumberOpts.tags="@smoke"
+# or
+npm run test:smoke
+```
+
+- Run critical tests
+```sh
+npm test -- --cucumberOpts.tags="@critical"
+# or
+npm run test:critical
+```
+
+- Run regression tests
+```sh
+npm test -- --cucumberOpts.tags="@regression"
+# or
+npm run test:regression
+```
+
+- Run multiple tags with AND logic
+```sh
+npm test -- --cucumberOpts.tags="@critical and @positive"
+```
+
+- Run multiple tags with OR logic
+```sh
+npm test -- --cucumberOpts.tags="@smoke or @critical"
+```

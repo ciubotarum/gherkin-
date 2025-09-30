@@ -11,7 +11,12 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "lint:check": "eslint src/ --max-warnings 0",
-    "report:open": "start reports/html-reports/report.html"
+    "report:open": "start reports/html-reports/report.html",
+    "test:negative": "wdio run ./src/configs/wdio.conf.js --cucumberOpts.tags=@negative",
+    "test:positive": "wdio run ./src/configs/wdio.conf.js --cucumberOpts.tags=@positive",
+    "test:smoke": "wdio run ./src/configs/wdio.conf.js --cucumberOpts.tags=@smoke",
+    "test:critical": "wdio run ./src/configs/wdio.conf.js --cucumberOpts.tags=@critical",
+    "test:regression": "wdio run ./src/configs/wdio.conf.js --cucumberOpts.tags=@regression"
   },
   "keywords": [],
   "author": "",

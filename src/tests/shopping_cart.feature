@@ -1,5 +1,6 @@
 Feature: Shopping cart
 
+    @positive @regression
     Scenario: User adds a product to the cart and sees a success toast
         Given I am on the main page to test the shopping cart functionality
         When I click on a product

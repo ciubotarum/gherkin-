@@ -46,7 +46,17 @@ exports.config = {
 
   cucumberOpts: {
     require: [path.resolve(__dirname, '../tests/step_definitions/*.steps.js')],
+    backtrace: false,
+    requireModule: [],
+    dryRun: false,
+    failFast: false,
+    name: [],
+    snippets: true,
+    source: true,
+    strict: false,
+    tagExpression: '',
     timeout: 60000,
+    ignoreUndefinedDefinitions: false,
   },
 
   onPrepare: function (config, capabilities) {

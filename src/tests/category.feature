@@ -1,5 +1,6 @@
 Feature: Category navigation
 
+    @positive @critical
     Scenario: User navigates to Hand Tools category from main menu
         Given I am on the main page looking for Hand Tools
         When I click the main categories button in the header

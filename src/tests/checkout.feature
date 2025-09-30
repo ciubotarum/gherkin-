@@ -1,5 +1,6 @@
 Feature: Checkout process
 
+    @smoke @positive @critical
     Scenario: User completes a successful order
         Given I am on the main page to find a product
         When I add a product to the cart

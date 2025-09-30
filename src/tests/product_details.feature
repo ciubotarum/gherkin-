@@ -1,5 +1,6 @@
 Feature: Product details
 
+    @positive @regression
     Scenario: User views the details of the first product
         Given I am on the main page looking for products
         When I click the first product

@@ -1,5 +1,6 @@
 Feature: Language selection
 
+    @positive @regression
     Scenario: User changes the site language
         Given I am on the main page to change the language
         When I click the language button

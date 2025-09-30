@@ -1,5 +1,6 @@
 Feature: Login functionality
 
+  @negative @regression @critical
   Scenario: User logs in without an account
     Given I am on the login page
     When I enter invalid credentials

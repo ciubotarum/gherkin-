@@ -1,5 +1,6 @@
 Feature: Product filtering
 
+    @positive @regression
     Scenario: User filters products by category and brand
         Given I am on the main page looking to filter products
         When I select a "Hammer" category
